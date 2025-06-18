@@ -53,6 +53,12 @@
     "node": ">=20.0.0"
   },
   "release": {
-    "branches": ["master", "next"]
+    "branches": [
+      "production",
+      {
+        "name": "main",
+        "prerelease": "dev"
+      }
+    ]
   }
 }
