@@ -1,17 +1,9 @@
-name: Lint Frontend service
-
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
   lint:
-    name: "Run ESLint and Prettier checks"
+    name: "Run ESLint"
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +13,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version-file: package.json
           cache: "npm"
           cache-dependency-path: package-lock.json
 
@@ -30,6 +22,3 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint
-
-      - name: Check Prettier formatting
-        run: npm run format:check

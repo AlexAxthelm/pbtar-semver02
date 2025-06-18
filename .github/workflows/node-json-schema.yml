@@ -1,21 +1,5 @@
-name: JSON validate Frontend service
-
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "pbtar_schema.json"
-      - "src/data/scenarios_metadata.json"
-      - ".github/workflows/frontend-json.yml"
-  pull_request:
-    branches:
-      - main
-    paths:
-      - "pbtar_schema.json"
-      - "src/data/scenarios_metadata.json"
-      - ".github/workflows/frontend-json.yml"
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
   lint:
@@ -29,7 +13,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version-file: package.json
           cache: "npm"
           cache-dependency-path: package-lock.json
 

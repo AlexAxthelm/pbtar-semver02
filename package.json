@@ -1,12 +1,12 @@
 {
   "name": "pbtar_frontend",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "type": "module",
   "description": "Front-end for the pathways-based transition assessment repository (pbtar)",
   "main": "main.jsx",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --mode ${VITE_BUILD_MODE:-development}",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -14,36 +14,73 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "json:check": "ajv validate -s pbtar_schema.json src/data/scenarios_metadata.json"
+    "json:check": "ajv validate -s pbtar_schema.json src/data/*.json"
   },
   "author": "RMI",
   "license": "MIT",
   "dependencies": {
-    "lucide-react": "^0.511.0",
+    "lucide-react": "^0.516.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.1"
+    "react-router-dom": "^7.6.2"
   },
   "devDependencies": {
-    "@eslint/js": "^9.27.0",
+    "@eslint/js": "^9.29.0",
     "@jirutka/ajv-cli": "^6.0.0",
-    "@tailwindcss/postcss": "^4.1.7",
+    "@tailwindcss/postcss": "^4.1.10",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
-    "@types/react": "^19.1.6",
-    "@types/react-dom": "^19.1.5",
-    "@vitejs/plugin-react": "^4.5.0",
+    "@types/node": "^24.0.3",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.5.2",
     "autoprefixer": "^10.4.21",
-    "eslint": "^9.27.0",
+    "eslint": "^9.29.0",
     "globals": "^16.2.0",
     "jiti": "^2.4.2",
     "jsdom": "^26.1.0",
-    "postcss": "^8.5.3",
+    "postcss": "^8.5.6",
     "prettier": "^3.5.3",
+    "semantic-release": "^24.2.5",
+    "simple-git": "^3.28.0",
     "tailwindcss": "^4.1.7",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.33.0",
+    "typescript-eslint": "^8.34.1",
     "vite": "^6.3.5",
-    "vitest": "^3.1.4"
+    "vitest": "^3.2.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "release": {
+    "branches": [
+      "production",
+      {
+        "name": "main",
+        "prerelease": "dev"
+      }
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false,
+          "tarballDir": "dist"
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            {
+              "path": "dist/*.tgz",
+              "label": "tarball"
+            }
+          ]
+        }
+      ]
+    ]
   }
 }
