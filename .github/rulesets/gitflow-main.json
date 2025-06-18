@@ -1,9 +1,9 @@
 {
-  "id": 6129977,
+  "id": 6162876,
   "name": "gitflow-main",
   "target": "branch",
   "source_type": "Repository",
-  "source": "RMI/pbtar",
+  "source": "AlexAxthelm/pbtar-semver02",
   "enforcement": "active",
   "conditions": {
     "ref_name": {
